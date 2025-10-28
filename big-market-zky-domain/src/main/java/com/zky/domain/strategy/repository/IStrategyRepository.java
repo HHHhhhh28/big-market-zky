@@ -4,6 +4,7 @@ package com.zky.domain.strategy.repository;
 import com.zky.domain.strategy.model.entity.StrategyAwardEntity;
 import com.zky.domain.strategy.model.entity.StrategyEntity;
 import com.zky.domain.strategy.model.entity.StrategyRuleEntity;
+import com.zky.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,9 @@ public interface IStrategyRepository {
     StrategyRuleEntity queryStrategyRule(Long strategyId, String ruleModel);
 
     String queryStrategyRuleValue(Long strategyId, Integer awardId, String ruleModel);
+
+    StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId);
+
 
 
 }
