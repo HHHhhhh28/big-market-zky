@@ -6,6 +6,7 @@ import com.zky.domain.strategy.model.entity.StrategyEntity;
 import com.zky.domain.strategy.model.entity.StrategyRuleEntity;
 import com.zky.domain.strategy.model.valobj.RuleTreeVO;
 import com.zky.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import com.zky.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
 import java.util.List;
 import java.util.Map;
