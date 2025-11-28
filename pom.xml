@@ -13,6 +13,7 @@
         <module>big-market-zky-trigger</module>
         <module>big-market-zky-infrastructure</module>
         <module>big-market-zky-types</module>
+        <module>big-market-zky-api</module>
     </modules>
 
     <repositories>
