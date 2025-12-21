@@ -5,10 +5,10 @@ import com.zky.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 /**
  * @author zky
- * @description 活动sku库存处理接口
+ * @description 抽奖活动SKU库存服务
  * @create
  */
-public interface ISkuStock {
+public interface IRaffleActivitySkuStockService {
 
     /**
      * 获取活动sku库存消耗队列

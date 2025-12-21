@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.util.*;
 
@@ -37,7 +36,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         // 2 缓存奖品库存【用于decr扣减库存使用】
         for (StrategyAwardEntity strategyAward : strategyAwardEntities) {
             Integer awardId = strategyAward.getAwardId();
-            Integer awardCount = strategyAward.getAwardCount();
+            Integer awardCount = strategyAward.getAwardCountSurplus();
             cacheStrategyAwardCount(strategyId, awardId, awardCount);
         }
 
