@@ -1,23 +1,23 @@
-package com.zky.domain.activity.service;
+package com.zky.domain.activity.service.quota;
 
 import com.zky.domain.activity.model.entity.ActivityCountEntity;
 import com.zky.domain.activity.model.entity.ActivityEntity;
 import com.zky.domain.activity.model.entity.ActivitySkuEntity;
 import com.zky.domain.activity.repository.IActivityRepository;
-import com.zky.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import com.zky.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 
 /**
  * @author zky
  * @description 抽奖活动的支撑类
  * @create
  */
-public class RaffleActivitySupport {
+public class RaffleActivityAccountQuotaSupport {
 
     protected DefaultActivityChainFactory defaultActivityChainFactory;
 
     protected IActivityRepository activityRepository;
 
-    public RaffleActivitySupport(IActivityRepository activityRepository, DefaultActivityChainFactory defaultActivityChainFactory) {
+    public RaffleActivityAccountQuotaSupport(IActivityRepository activityRepository, DefaultActivityChainFactory defaultActivityChainFactory) {
         this.activityRepository = activityRepository;
         this.defaultActivityChainFactory = defaultActivityChainFactory;
     }

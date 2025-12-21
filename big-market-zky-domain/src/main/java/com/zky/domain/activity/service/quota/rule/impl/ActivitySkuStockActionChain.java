@@ -1,4 +1,4 @@
-package com.zky.domain.activity.service.rule.impl;
+package com.zky.domain.activity.service.quota.rule.impl;
 
 import com.zky.domain.activity.model.entity.ActivityCountEntity;
 import com.zky.domain.activity.model.entity.ActivityEntity;
@@ -6,7 +6,7 @@ import com.zky.domain.activity.model.entity.ActivitySkuEntity;
 import com.zky.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import com.zky.domain.activity.repository.IActivityRepository;
 import com.zky.domain.activity.service.armory.IActivityDispatch;
-import com.zky.domain.activity.service.rule.AbstractActionChain;
+import com.zky.domain.activity.service.quota.rule.AbstractActionChain;
 import com.zky.types.enums.ResponseCode;
 import com.zky.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +48,5 @@ public class ActivitySkuStockActionChain extends AbstractActionChain {
 
         throw new AppException(ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getCode(), ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getInfo());
     }
-
 
 }

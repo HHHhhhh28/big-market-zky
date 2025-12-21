@@ -5,10 +5,10 @@ import com.zky.domain.activity.model.entity.SkuRechargeEntity;
 
 /**
  * @author zky
- * @description 抽奖活动订单接口
+ * @description 抽奖活动账户额度服务
  * @create
  */
-public interface IRaffleOrder {
+public interface IRaffleActivityAccountQuotaService {
 
     /**
      * 创建 sku 账户充值订单，给用户增加抽奖次数
@@ -19,6 +19,6 @@ public interface IRaffleOrder {
      * @param skuRechargeEntity 活动商品充值实体对象
      * @return 活动ID
      */
-    String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
+    String createOrder(SkuRechargeEntity skuRechargeEntity);
 
 }

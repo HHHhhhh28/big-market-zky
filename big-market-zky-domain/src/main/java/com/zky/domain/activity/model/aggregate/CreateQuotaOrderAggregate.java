@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author zky
- * @description 下单聚合对象
+ * @description 账户额度下单聚合对象
  * @create
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateOrderAggregate {
+public class CreateQuotaOrderAggregate {
 
     /**
      * 用户ID
