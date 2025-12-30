@@ -2,8 +2,8 @@ package com.zky.trigger.api;
 
 import com.zky.trigger.api.dto.RaffleAwardListRequestDTO;
 import com.zky.trigger.api.dto.RaffleAwardListResponseDTO;
-import com.zky.trigger.api.dto.RaffleRequestDTO;
-import com.zky.trigger.api.dto.RaffleResponseDTO;
+import com.zky.trigger.api.dto.RaffleStrategyRequestDTO;
+import com.zky.trigger.api.dto.RaffleStrategyResponseDTO;
 import com.zky.types.model.Response;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @description 抽奖服务接口
  * @create
  */
-public interface IRaffleService {
+public interface IRaffleStrategyService {
 
     /**
      * 策略装配接口
@@ -37,6 +37,6 @@ public interface IRaffleService {
      * @param requestDTO 请求参数
      * @return 抽奖结果
      */
-    Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO requestDTO);
+    Response<RaffleStrategyResponseDTO> randomRaffle(RaffleStrategyRequestDTO requestDTO);
 
 }
