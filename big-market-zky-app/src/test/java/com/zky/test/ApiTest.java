@@ -1,6 +1,8 @@
 package com.zky.test;
 
+import com.alibaba.fastjson2.JSON;
 import com.zky.infrastructure.persistent.redis.IRedisService;
+import com.zky.trigger.api.dto.RaffleAwardListRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,10 @@ public class ApiTest {
 
     @Test
     public void test() {
-        log.info("测试完成");
+        RaffleAwardListRequestDTO requestDTO = new RaffleAwardListRequestDTO();
+        requestDTO.setUserId("xiaofuge");
+        requestDTO.setActivityId(100301L);
+        log.info(JSON.toJSONString(requestDTO));
     }
 
     @Resource
