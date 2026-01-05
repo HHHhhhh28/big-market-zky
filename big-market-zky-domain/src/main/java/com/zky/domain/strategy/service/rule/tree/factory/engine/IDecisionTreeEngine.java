@@ -3,6 +3,8 @@ package com.zky.domain.strategy.service.rule.tree.factory.engine;
 
 import com.zky.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 
+import java.util.Date;
+
 /**
  * @author zky
  * @description 规则树组合接口
@@ -10,6 +12,6 @@ import com.zky.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
  */
 public interface IDecisionTreeEngine {
 
-    DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId, Date endDateTime);
 
 }
