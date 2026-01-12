@@ -2,6 +2,7 @@ package com.zky.domain.credit.repository;
 
 
 import com.zky.domain.credit.model.aggregate.TradeAggregate;
+import com.zky.domain.credit.model.entity.CreditAccountEntity;
 
 /**
  * @author zky
@@ -11,5 +12,7 @@ import com.zky.domain.credit.model.aggregate.TradeAggregate;
 public interface ICreditRepository {
 
     void saveUserCreditTradeOrder(TradeAggregate tradeAggregate);
+
+    CreditAccountEntity queryUserCreditAccount(String userId);
 
 }
