@@ -1,7 +1,10 @@
 package com.zky.domain.activity.model.entity;
 
 import com.zky.domain.activity.model.valobj.OrderTradeTypeVO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author zky
@@ -9,6 +12,9 @@ import lombok.Data;
  * @create
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SkuRechargeEntity {
 
     /** 用户ID */
