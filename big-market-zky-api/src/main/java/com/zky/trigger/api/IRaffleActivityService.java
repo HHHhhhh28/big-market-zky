@@ -2,7 +2,7 @@ package com.zky.trigger.api;
 
 
 import com.zky.trigger.api.dto.*;
-import com.zky.types.model.Response;
+import com.zky.trigger.api.response.Response;
 
 import java.math.BigDecimal;
 import java.util.List;
