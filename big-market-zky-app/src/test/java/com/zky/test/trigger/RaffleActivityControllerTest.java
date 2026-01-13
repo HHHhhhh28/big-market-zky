@@ -3,8 +3,9 @@ package com.zky.test.trigger;
 import com.alibaba.fastjson.JSON;
 import com.zky.trigger.api.IRaffleActivityService;
 import com.zky.trigger.api.dto.*;
-import com.zky.types.model.Response;
+import com.zky.trigger.api.response.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.framework.CuratorFramework;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -25,8 +27,12 @@ import java.util.concurrent.CountDownLatch;
 @SpringBootTest
 public class RaffleActivityControllerTest {
 
+
     @Resource
     private IRaffleActivityService raffleActivityService;
+
+    @Resource
+    private CuratorFramework curatorFramework;
 
     @Test
     public void test_armory() {
@@ -35,8 +41,13 @@ public class RaffleActivityControllerTest {
     }
 
     @Test
+    public void test_set_dcc_value() throws Exception {
+        curatorFramework.setData().forPath("/big-market-dcc/config/degradeSwitch", "close".getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Test
     public void test_draw() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             ActivityDrawRequestDTO request = new ActivityDrawRequestDTO();
             request.setActivityId(100301L);
             request.setUserId("xiaofuge");
@@ -109,12 +120,13 @@ public class RaffleActivityControllerTest {
     public void test_creditPayExchangeSku() throws InterruptedException {
         SkuProductShopCartRequestDTO request = new SkuProductShopCartRequestDTO();
         request.setUserId("xiaofuge");
-        request.setSku(9011L);
+        request.setSku(9014L);
         Response<Boolean> response = raffleActivityService.creditPayExchangeSku(request);
         log.info("请求参数：{}", JSON.toJSONString(request));
         log.info("测试结果：{}", JSON.toJSONString(response));
 
         new CountDownLatch(1).await();
     }
+
 
 }

@@ -6,7 +6,7 @@ import com.zky.trigger.api.dto.RaffleAwardListRequestDTO;
 import com.zky.trigger.api.dto.RaffleAwardListResponseDTO;
 import com.zky.trigger.api.dto.RaffleStrategyRuleWeightRequestDTO;
 import com.zky.trigger.api.dto.RaffleStrategyRuleWeightResponseDTO;
-import com.zky.types.model.Response;
+import com.zky.trigger.api.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

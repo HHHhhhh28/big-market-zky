@@ -1,4 +1,4 @@
-package com.zky.types.model;
+package com.zky.trigger.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
