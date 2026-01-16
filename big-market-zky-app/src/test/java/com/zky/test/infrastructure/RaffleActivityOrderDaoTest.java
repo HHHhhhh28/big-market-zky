@@ -1,8 +1,8 @@
 package com.zky.test.infrastructure;
 
 import com.alibaba.fastjson.JSON;
-import com.zky.infrastructure.persistent.dao.IRaffleActivityOrderDao;
-import com.zky.infrastructure.persistent.po.RaffleActivityOrder;
+import com.zky.infrastructure.dao.IRaffleActivityOrderDao;
+import com.zky.infrastructure.dao.po.RaffleActivityOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.RandomStringUtils;
 import org.jeasy.random.EasyRandom;
