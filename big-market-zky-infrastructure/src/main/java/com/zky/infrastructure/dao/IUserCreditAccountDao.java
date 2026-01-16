@@ -1,0 +1,21 @@
+package com.zky.infrastructure.dao;
+
+import com.zky.infrastructure.dao.po.UserCreditAccount;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * @author zky
+ * @description 用户积分账户
+ * @create
+ */
+@Mapper
+public interface IUserCreditAccountDao {
+
+    void insert(UserCreditAccount userCreditAccountReq);
+
+    int updateAddAmount(UserCreditAccount userCreditAccountReq);
+
+    UserCreditAccount queryUserCreditAccount(UserCreditAccount userCreditAccountReq);
+
+    int updateSubtractionAmount(UserCreditAccount userCreditAccountReq);
+}

@@ -1,7 +1,7 @@
 package com.zky.test;
 
 import com.alibaba.fastjson2.JSON;
-import com.zky.infrastructure.persistent.redis.IRedisService;
+import com.zky.infrastructure.redis.IRedisService;
 import com.zky.trigger.api.dto.RaffleAwardListRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

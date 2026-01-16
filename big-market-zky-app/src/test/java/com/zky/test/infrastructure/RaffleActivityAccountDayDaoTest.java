@@ -1,7 +1,7 @@
 package com.zky.test.infrastructure;
 
-import com.zky.infrastructure.persistent.dao.IRaffleActivityAccountDayDao;
-import com.zky.infrastructure.persistent.po.RaffleActivityAccountDay;
+import com.zky.infrastructure.dao.IRaffleActivityAccountDayDao;
+import com.zky.infrastructure.dao.po.RaffleActivityAccountDay;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

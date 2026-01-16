@@ -2,7 +2,7 @@ package com.zky.test.domain.strategy;
 
 import com.zky.domain.strategy.service.armory.IStrategyArmory;
 import com.zky.domain.strategy.service.armory.IStrategyDispatch;
-import com.zky.infrastructure.persistent.redis.IRedisService;
+import com.zky.infrastructure.redis.IRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
