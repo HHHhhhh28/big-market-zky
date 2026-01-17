@@ -35,11 +35,17 @@ public interface IActivityRepository {
 
     ActivitySkuStockKeyVO takeQueueValue();
 
+    ActivitySkuStockKeyVO takeQueueValue(Long sku);
+
     void clearQueueValue();
+
+    void clearQueueValue(Long sku);
 
     void updateActivitySkuStock(Long sku);
 
     void clearActivitySkuStock(Long sku);
+
+    List<Long> querySkuList();
 
     UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
 
