@@ -79,13 +79,29 @@ public class StrategyRepository implements IStrategyRepository {
         return strategyAwardEntities;
     }
 
+    /**
+     * 在 Redisson 中，当你调用 getMap 方法时，如果指定的 key 不存在，Redisson 并不会立即在 Redis 数据库中创建这个 key。相反，它会返回一个 RMap 对象的实例，这个实例是一个本地的 Java 对象，它代表了 Redis 中的一个哈希（hash）。
+     * <p>
+     * 当你开始使用这个 RMap 实例进行操作，比如添加键值对，那么 Redisson 会在 Redis 数据库中创建相应的 key，并将数据存储在这个 key 对应的哈希中。如果你只是获取了 RMap 实例而没有进行任何操作，那么在 Redis 数据库中是不会有任何变化的。
+     * <p>
+     * 简单来说，getMap 方法返回的 RMap 对象是懒加载的，只有在你实际进行操作时，Redis 数据库中的数据结构才会被创建或修改。
+     */
     @Override
-    public void storeStrategyAwardSearchRateTable(String key, Integer rateRange, Map<Integer, Integer> strategyAwardSearchRateTable) {
+    public <K, V> void storeStrategyAwardSearchRateTable(String key, Integer rateRange, Map<K, V> strategyAwardSearchRateTable) {
         // 1. 存储抽奖策略范围值，如10000，用于生成1000以内的随机数
         redisService.setValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY + key, rateRange);
-        // 2. 存储概率查找表
-        Map<Integer, Integer> cacheRateTable = redisService.getMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key);
+        // 2. 存储概率查找表 - 存在则删除重新装配
+        String tableCacheKey = Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key;
+        if (redisService.isExists(tableCacheKey)) {
+            redisService.remove(tableCacheKey);
+        }
+        Map<K, V> cacheRateTable = redisService.getMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key);
         cacheRateTable.putAll(strategyAwardSearchRateTable);
+    }
+
+    @Override
+    public <K, V> Map<K, V> getMap(String key) {
+        return redisService.getMap(Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key);
     }
 
     @Override
@@ -130,6 +146,7 @@ public class StrategyRepository implements IStrategyRepository {
         strategyRuleReq.setStrategyId(strategyId);
         strategyRuleReq.setRuleModel(ruleModel);
         StrategyRule strategyRuleRes = strategyRuleDao.queryStrategyRule(strategyRuleReq);
+        if (null == strategyRuleRes) return null;
         return StrategyRuleEntity.builder()
                 .strategyId(strategyRuleRes.getStrategyId())
                 .awardId(strategyRuleRes.getAwardId())
@@ -139,7 +156,6 @@ public class StrategyRepository implements IStrategyRepository {
                 .ruleDesc(strategyRuleRes.getRuleDesc())
                 .build();
     }
-
 
     @Override
     public String queryStrategyRuleValue(Long strategyId, String ruleModel) {
@@ -161,6 +177,7 @@ public class StrategyRepository implements IStrategyRepository {
         strategyAward.setStrategyId(strategyId);
         strategyAward.setAwardId(awardId);
         String ruleModels = strategyAwardDao.queryStrategyAwardRuleModels(strategyAward);
+        if (null == ruleModels) return null;
         return StrategyAwardRuleModelVO.builder().ruleModels(ruleModels).build();
     }
 
@@ -231,6 +248,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     /**
      * 扣减库存并加锁操作，decr和0对比，如果是incr操作就和总量对比，和总量对比可以动态添加库存
+     *
      * @param cacheKey    缓存Key
      * @param endDateTime 活动结束时间
      */
@@ -257,6 +275,7 @@ public class StrategyRepository implements IStrategyRepository {
         }
         return lock;
     }
+
     @Override
     public void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO) {
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY + Constants.UNDERLINE + strategyAwardStockKeyVO.getStrategyId() + Constants.UNDERLINE + strategyAwardStockKeyVO.getAwardId();
@@ -328,7 +347,7 @@ public class StrategyRepository implements IStrategyRepository {
         RaffleActivityAccountDay raffleActivityAccountDayReq = new RaffleActivityAccountDay();
         raffleActivityAccountDayReq.setUserId(userId);
         raffleActivityAccountDayReq.setActivityId(activityId);
-        raffleActivityAccountDayReq.setDay(raffleActivityAccountDayReq.currentDay());
+        raffleActivityAccountDayReq.setDay(RaffleActivityAccountDay.currentDay());
         RaffleActivityAccountDay raffleActivityAccountDay = raffleActivityAccountDayDao.queryActivityAccountDayByUserId(raffleActivityAccountDayReq);
         if (null == raffleActivityAccountDay) return 0;
         // 总次数 - 剩余的，等于今日参与的
@@ -414,7 +433,7 @@ public class StrategyRepository implements IStrategyRepository {
         if (null == strategyAwards || strategyAwards.isEmpty()) return null;
 
         List<StrategyAwardStockKeyVO> strategyAwardStockKeyVOS = new ArrayList<>();
-        for (StrategyAward strategyAward: strategyAwards){
+        for (StrategyAward strategyAward : strategyAwards) {
             StrategyAwardStockKeyVO strategyAwardStockKeyVO = StrategyAwardStockKeyVO.builder()
                     .strategyId(strategyAward.getStrategyId())
                     .awardId(strategyAward.getAwardId())
@@ -423,6 +442,19 @@ public class StrategyRepository implements IStrategyRepository {
         }
 
         return strategyAwardStockKeyVOS;
+    }
+
+    @Override
+    public void cacheStrategyArmoryAlgorithm(String key, String beanName) {
+        String cacheKey = Constants.RedisKey.STRATEGY_ARMORY_ALGORITHM_KEY + key;
+        redisService.setValue(cacheKey, beanName);
+    }
+
+    @Override
+    public String queryStrategyArmoryAlgorithmFromCache(String key) {
+        String cacheKey = Constants.RedisKey.STRATEGY_ARMORY_ALGORITHM_KEY + key;
+        if (!redisService.isExists(cacheKey)) return null;
+        return redisService.getValue(cacheKey);
     }
 
 }
