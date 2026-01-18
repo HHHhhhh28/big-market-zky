@@ -20,19 +20,18 @@ import java.util.Map;
  * 基于 Zookeeper 的配置中心实现原理
  */
 @Slf4j
-@Configuration
 public class DCCValueBeanFactory implements BeanPostProcessor {
 
     private static final String BASE_CONFIG_PATH = "/big-market-dcc";
     private static final String BASE_CONFIG_PATH_CONFIG = BASE_CONFIG_PATH + "/config";
 
-    @Autowired(required = false)
     private CuratorFramework client;
 
     private final Map<String, Object> dccObjGroup = new HashMap<>();
 
-    public DCCValueBeanFactory() throws Exception {
+    public DCCValueBeanFactory(CuratorFramework client) throws Exception {
         if (null == client) return;
+        this.client = client;
 
         // 节点判断
         if (null == client.checkExists().forPath(BASE_CONFIG_PATH_CONFIG)) {
@@ -64,6 +63,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                         field.setAccessible(true);
                         field.set(objBean, new String(data.getData()));
                         field.setAccessible(false);
+                        log.info("DCC 节点监听 listener value set");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
