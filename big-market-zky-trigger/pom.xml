@@ -71,6 +71,10 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.zky</groupId>
+            <artifactId>big-market-zky-querys</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
