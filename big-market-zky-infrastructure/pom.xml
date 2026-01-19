@@ -36,6 +36,10 @@
             <groupId>com.zky</groupId>
             <artifactId>big-market-zky-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zky</groupId>
+            <artifactId>big-market-zky-querys</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

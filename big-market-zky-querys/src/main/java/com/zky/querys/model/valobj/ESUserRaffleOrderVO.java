@@ -1,24 +1,21 @@
-package com.zky.infrastructure.dao.po;
+package com.zky.querys.model.valobj;
 
-import lombok.AllArgsConstructor;
+
+
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import java.util.Date;
 
 /**
  * @author zky
- * @description 用户抽奖订单表
+ * @description 用户抽奖订单表值对象
  * @create
  */
-@Data
+@Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserRaffleOrder {
+public class ESUserRaffleOrderVO {
 
-    private String id;
     /** 用户ID */
     private String userId;
     /** 活动ID */

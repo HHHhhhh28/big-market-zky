@@ -1,24 +1,17 @@
-package com.zky.infrastructure.dao.po;
+package com.zky.trigger.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 /**
  * @author zky
- * @description 用户抽奖订单表
+ * @description 用户抽奖订单DTO数据
  * @create
  */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserRaffleOrder {
+public class ESUserRaffleOrderResponseDTO {
 
-    private String id;
     /** 用户ID */
     private String userId;
     /** 活动ID */
